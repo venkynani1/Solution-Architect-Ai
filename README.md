@@ -1,26 +1,30 @@
 # Solution Architect AI
 
-Paste a business problem statement → get the best solution approach, powered by ChatGPT (OpenAI API):
-problem analysis, recommended approach, architecture, tech stack with trend signals, alternatives,
-roadmap, risks, KPIs, effort and a pitch line. Optional live web search keeps "trending tech" current.
+Paste a business problem statement → get the best solution approach: problem analysis, recommended
+approach, architecture, tech stack with trend signals, alternatives, roadmap, risks, KPIs, effort and
+a pitch line. Optional live web search keeps "trending tech" current.
+
+Runs **free on Groq** (`openai/gpt-oss-120b`, with built-in browser search), or on OpenAI if you prefer.
+
+## Get a free Groq key
+1. Sign in at https://console.groq.com (Google/GitHub login, no card).
+2. Go to **API Keys** → **Create API Key** → copy it.
 
 ## Run locally
 ```bash
 npm install
-cp .env.example .env.local   # add your OpenAI key
+cp .env.example .env.local   # paste GROQ_API_KEY
 npm run dev                  # http://localhost:3000
 ```
 
 ## Deploy to Vercel
-1. Push this folder to a GitHub repo.
-2. Import it in Vercel.
-3. Add env var `OPENAI_API_KEY` (and optionally `OPENAI_MODEL`).
-4. Deploy.
+1. Import this repo in Vercel.
+2. Add env var `GROQ_API_KEY` (optionally `GROQ_MODEL`).
+3. Deploy.
 
 ## Notes
-- The API key stays on the server (`app/api/solve/route.js`); it is never sent to the browser.
-- Uses the OpenAI Responses API with the `web_search` tool. If your model/account doesn't support
-  web search, it automatically falls back to plain generation.
-- Change the model with `OPENAI_MODEL` (default `gpt-5.6`). A cheaper model works too.
+- Provider: Groq is used when `GROQ_API_KEY` is set; otherwise `OPENAI_API_KEY` (paid) is used.
+- API keys stay on the server (`app/api/solve/route.js`); never commit them.
+- If web search isn't available, the app falls back to plain generation automatically.
+- Free-tier rate limits apply; a "rate limit" message means wait a minute.
 - Edit the output format / rules in `lib/prompt.js`.
-- Last 10 results are kept in the browser (localStorage). "Copy as Markdown" exports a result.

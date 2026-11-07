@@ -67,7 +67,7 @@ export default function Home() {
   return (
     <main className="wrap">
       <h1>Solution Architect AI</h1>
-      <p className="sub">Paste a business problem. Get the best solution approach, architecture and trending tech stack — powered by ChatGPT.</p>
+      <p className="sub">Paste a business problem. Get the best solution approach, architecture and trending tech stack — powered by GPT-OSS on Groq (free) or OpenAI.</p>
 
       <div className="card">
         <label>Problem statement</label>
